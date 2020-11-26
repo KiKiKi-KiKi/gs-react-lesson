@@ -48,6 +48,8 @@ module.exports = {
     'sort-keys': 'off',
     'sort-imports': 'off',
     'react/prop-types': 'off',
+    // Don't need `import React from 'react'` in React v17
+    'react/react-in-jsx-scope': 'off',
     'require-yield': 'error',
   },
 };
