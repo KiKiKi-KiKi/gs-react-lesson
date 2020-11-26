@@ -3,6 +3,7 @@ module.exports = {
     browser: true,
     es6: true,
     node: true,
+    'jest/globals': true,
   },
   parser: 'babel-eslint',
   extends: [
@@ -26,7 +27,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['react', 'prettier'],
+  plugins: ['react', 'prettier', 'jest'],
   root: true,
   rules: {
     'eol-last': ['error', 'always'],
