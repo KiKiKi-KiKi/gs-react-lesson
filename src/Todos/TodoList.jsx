@@ -1,0 +1,13 @@
+import { TodoItem } from './TodoItem';
+
+export const TodoList = ({ todos }) => {
+  return (
+    <ul className="todo">
+      {todos.map(({ id, ...postData }) => (
+        <li key={id} className="todo__item">
+          <TodoItem id={id} {...postData} />
+        </li>
+      ))}
+    </ul>
+  );
+};
