@@ -1,12 +1,41 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { TodoList } from './TodoList';
 import { COLLECTION_TODOS } from '../config';
 import { useGetDataAll } from '../hooks/useFirebase';
 
 const TodoContainer = ({ data }) => {
-  return (
-    <div className="todo-container">{data && <TodoList todos={data} />}</div>
+  const [todos, setTodos] = useState(data);
+
+  const onChangeStatus = useCallback(
+    (postID) => (status) => {
+      setTodos((_todos) => {
+        const todos = [..._todos];
+        const updateItemIndex = todos.findIndex((item) => item.id === postID);
+        console.log('onChangeStatus >', todos[updateItemIndex]);
+        /*
+        const newTodos = [
+          ...todos.slice(0, updateItemIndex),
+          {
+            ...todos[updateItemIndex],
+            isDone: status,
+          },
+          ...todos.slice(updateItemIndex + 1),
+        ];
+        */
+
+        // splice return deleted item
+        todos.splice(updateItemIndex, 1, {
+          ...todos[updateItemIndex],
+          isDone: status,
+        });
+
+        return todos;
+      });
+    },
+    [],
   );
+
+  return <TodoList todos={todos} onChangeStatus={onChangeStatus} />;
 };
 
 export const Todo = () => {
@@ -18,5 +47,12 @@ export const Todo = () => {
 
   console.log(data, error);
 
-  return error ? <p>Error</p> : <TodoContainer data={data} />;
+  return (
+    <>
+      {error && <p>Error</p>}
+      <div className="todo-container">
+        {data ? <TodoContainer data={data} /> : <span>Loading...</span>}
+      </div>
+    </>
+  );
 };
