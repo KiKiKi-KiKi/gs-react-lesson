@@ -30,11 +30,14 @@ module.exports = {
   plugins: ['react', 'prettier', 'jest'],
   root: true,
   rules: {
+    // need default in switch
+    'default-case': 'error',
     'eol-last': ['error', 'always'],
     // 'func-style': ['error', 'expression', { allowArrowFunctions: true }],
     // Cf. https://eslint.org/docs/rules/func-style
     'func-style': 'off',
-    indent: 'off',
+    // https://qiita.com/nju33/items/1a1d447c9a1a4ac18410
+    indent: ['error', 2, { SwitchCase: 1 }],
     'newline-before-return': 'error',
     'no-console': 'warn',
     'no-continue': 'off',
