@@ -3,9 +3,9 @@ module.exports = {
     browser: true,
     es6: true,
     node: true,
+    es2020: true,
     'jest/globals': true,
   },
-  parser: 'babel-eslint',
   extends: [
     // 'eslint:all',
     'eslint:recommended',
@@ -24,7 +24,7 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 2018,
+    ecmaVersion: 2020,
     sourceType: 'module',
   },
   plugins: ['react', 'prettier', 'jest'],
